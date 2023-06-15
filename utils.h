@@ -8,4 +8,6 @@
 
 std::vector<std::string> InputData(int challenge_id);
 
+void strip_string(std::string& str);
+
 #endif //UTILS_H

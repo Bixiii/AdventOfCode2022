@@ -7,8 +7,9 @@ int main() {
     int challenge_id = 0;
     auto input_data = InputData(challenge_id);
 
-    for(auto i=0; i < input_data.size(); i++) {
-        std::cout << input_data[i] << std::endl;
+    for(auto & line : input_data) {
+        strip_string(line);
+        std::cout << line << std::endl;
     }
 
     std::cout << "\n*** Results ***" << std::endl;

@@ -13,3 +13,8 @@ std::vector<std::string> InputData(int challenge_id){
     return input_data;
 
 }
+
+void strip_string(std::string& str) {
+    str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
+    str.erase(std::remove(str.begin(), str.end(), '\n'), str.end());
+}
