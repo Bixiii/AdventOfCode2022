@@ -53,6 +53,8 @@ int main() {
         }
     }
 
+    // PART I
+
     for(auto row=1; row<rows+1; row++) {
         int left_max = -1;
         for(auto col=1; col<cols+1; col++){
@@ -97,20 +99,81 @@ int main() {
     for (const auto& row : tree_grid) {
         for (auto tree : row) {
             if (tree.Visible()) {
-                std::cout << " * ";
+//                std::cout << " * ";
                 visible_trees++;
             } else {
-                std::cout << " . ";
+//                std::cout << " . ";
             }
         }
-        std::cout << std::endl;
+//        std::cout << std::endl;
     }
 
+    // PART II
 
+    int max_view_score = 0;
+    for(auto row=1; row<rows+1; row++) {
+        for(auto col=1; col<cols+1; col++){
+            int tree_height = tree_grid[row][col].Height();
+
+            // left
+            int view_row = row;
+            int view_col = col;
+            int view_left = 0;
+            do {
+                view_col--;
+                if (tree_grid[view_row][view_col].Height() < 0) {
+                    break;
+                }
+                view_left += 1;
+            } while (tree_grid[view_row][view_col].Height() < tree_height);
+
+
+            // top
+            view_row = row;
+            view_col = col;
+            int view_top = 0;
+            do {
+                view_row--;
+                if (tree_grid[view_row][view_col].Height() < 0) {
+                    break;
+                }
+                view_top += 1;
+            } while (tree_grid[view_row][view_col].Height() < tree_height);
+
+            // right
+            view_row = row;
+            view_col = col;
+            int view_right = 0;
+            do {
+                view_col++;
+                if (tree_grid[view_row][view_col].Height() < 0) {
+                    break;
+                }
+                view_right += 1;
+            } while (tree_grid[view_row][view_col].Height() < tree_height);
+
+            // bottom
+            view_row = row;
+            view_col = col;
+            int view_bottom = 0;
+            do {
+                view_row++;
+                if (tree_grid[view_row][view_col].Height() < 0) {
+                    break;
+                }
+                view_bottom += 1;
+            } while (tree_grid[view_row][view_col].Height() < tree_height);
+
+            int view_score = view_top*view_left*view_right*view_bottom;
+            if (view_score > max_view_score) {
+                max_view_score = view_score;
+            }
+        }
+    }
 
     std::cout << "\n*** Results ***" << std::endl;
     std::cout << "Day " << challenge_id << " - Part 1: " << visible_trees << std::endl;
-    std::cout << "Day " << challenge_id << " - Part 2: " << std::endl;
+    std::cout << "Day " << challenge_id << " - Part 2: " << max_view_score << std::endl;
 
     return 0;
 }
