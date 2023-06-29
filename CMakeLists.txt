@@ -32,4 +32,7 @@ configure_file(data/input_day_7.txt ${CMAKE_BINARY_DIR}/ COPYONLY)
 add_executable(day_8 day_8.cpp ${UTILS})
 configure_file(data/input_day_8.txt ${CMAKE_BINARY_DIR}/ COPYONLY)
 
+add_executable(day_9 day_9.cpp ${UTILS})
+configure_file(data/input_day_9.txt ${CMAKE_BINARY_DIR}/ COPYONLY)
+
 
